@@ -12,6 +12,7 @@ import {
 
 import Paper from '@mui/material/Paper';
 import {IMediaStatus} from '@src/types/models/mediaStatus';
+import Loading from '@components/common/Loading';
 
 interface Columns {
   id: string;
@@ -109,7 +110,7 @@ export default function Table({queryResult: {data, isLoading}}: TabelProps) {
     setColumnsTotal({...initColumnsTotal});
   }, [data]);
 
-  if (isLoading) return <div>로딩중...</div>;
+  if (isLoading) return <Loading />;
 
   return (
     <TableContainer component={Paper}>

@@ -37,23 +37,26 @@ export default function ManageList({
     setCurrentID(id);
   };
 
+  if (isLoading)
+    return (
+      <ManageListContainer>
+        {[1, 2, 3, 4, 5, 6, 7, 8].map(item => (
+          <ManageItemSkeleton key={item} />
+        ))}
+      </ManageListContainer>
+    );
+
   return (
     <ManageListContainer>
-      <>
-        {isLoading &&
-          [1, 2, 3, 4, 5, 6, 7, 8].map(item => (
-            <ManageItemSkeleton key={item} />
-          ))}
-        {data &&
-          adSelectData(data, type).map((ad: IAds) => (
-            <ManageItem
-              ad={ad}
-              handleDeleteData={handleDeleteData}
-              handleUpdateData={handleUpdateData}
-              key={ad.id}
-            />
-          ))}
-      </>
+      {data &&
+        adSelectData(data, type).map((ad: IAds) => (
+          <ManageItem
+            ad={ad}
+            handleDeleteData={handleDeleteData}
+            handleUpdateData={handleUpdateData}
+            key={ad.id}
+          />
+        ))}
     </ManageListContainer>
   );
 }

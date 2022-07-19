@@ -2,15 +2,16 @@ import React, {Suspense} from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import {RecoilRoot} from 'recoil';
 import {QueryClientProvider, QueryClient} from 'react-query';
-
-import Router from '@routes/Router';
-import {GlobalStyle, theme} from '@styles/.';
-import {Layout} from '@components/layout';
 import {ThemeProvider, Global} from '@emotion/react';
+import Router from '@routes/Router';
 import {
   createTheme,
   ThemeProvider as MuiThemeProvider,
 } from '@mui/material/styles';
+
+import {GlobalStyle, theme} from '@styles/.';
+import {Layout} from '@components/layout';
+import Loading from '@components/common/Loading';
 
 const MuiTheme = createTheme();
 
@@ -24,7 +25,7 @@ export default function App() {
           <MuiThemeProvider theme={MuiTheme}>
             <ThemeProvider theme={theme}>
               <Global styles={GlobalStyle} />
-              <Suspense fallback={<div>로딩중</div>}>
+              <Suspense fallback={<Loading />}>
                 <Layout>
                   <Router />
                 </Layout>

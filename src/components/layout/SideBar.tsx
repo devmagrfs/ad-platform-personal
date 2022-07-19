@@ -24,11 +24,19 @@ export default function SideBar() {
           <Logo>Logo</Logo>
           <CloseIcon onClick={handelSideMenu} />
         </LogoWrapper>
-        <StyledNavLink to="" onClick={handelSideMenu}>
+        <StyledNavLink
+          to=""
+          className={({isActive}) => (isActive ? 'active' : '')}
+          onClick={handelSideMenu}
+        >
           <DvrIcon />
           <Menu>대시보드</Menu>
         </StyledNavLink>
-        <StyledNavLink to="manage" onClick={handelSideMenu}>
+        <StyledNavLink
+          to="manage"
+          className={({isActive}) => (isActive ? 'active' : '')}
+          onClick={handelSideMenu}
+        >
           <LeaderboardIcon />
           <Menu>광고관리</Menu>
         </StyledNavLink>
@@ -53,6 +61,9 @@ const SidebarContainer = styled.div<{sideMenuOpen: boolean}>`
     width: 200px;
   }
   z-index: 4;
+  .active {
+    background-color: ${({theme}) => theme.hover.menu};
+  }
 `;
 const MenuIconWrap = styled.div`
   position: absolute;
