@@ -156,9 +156,11 @@ const DataCard = styled.div`
 const GraphChart = styled.div`
   flex: 1 0 auto;
   margin-top: 20px;
+  height: 350px;
 `;
 const BarChart = styled.div`
   flex: 1 0 auto;
+  height: 350px;
 `;
 
 const Diagram = styled.div`
