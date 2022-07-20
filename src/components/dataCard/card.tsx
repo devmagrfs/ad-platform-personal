@@ -44,40 +44,40 @@ function Card({info, type}: any) {
           <Div>
             <Title>ROAS</Title>
             <Content>{calculate(info, 'roas')}%</Content>
-            <div>{calculate(data, 'roas') - calculate(info, 'roas')}%</div>
+            <div>{calculate(info, 'roas') - calculate(data, 'roas')}%</div>
           </Div>
           <Div>
             <Title>광고비</Title>
             <Content>{calculateSum(info, 'cost', 0)} 원</Content>
             <div>
-              {calculateSum(data, 'cost') - calculateSum(info, 'cost')}원
+              {calculateSum(info, 'cost') - calculateSum(data, 'cost')}원
             </div>
           </Div>
           <Div>
             <Title>노출 수</Title>
             <Content>{calculateSum(info, 'imp', 0)} 회</Content>
-            <div>{calculateSum(data, 'imp') - calculateSum(info, 'imp')}회</div>
+            <div>{calculateSum(info, 'imp') - calculateSum(data, 'imp')}회</div>
           </Div>
           <Div>
             <Title>클릭 수</Title>
             <Content>{calculateSum(info, 'click', 0)} 회</Content>
             <div>
-              {calculateSum(data, 'click') - calculateSum(info, 'click')}회
+              {calculateSum(info, 'click') - calculateSum(data, 'click')}회
             </div>
           </Div>
           <Div>
             <Title>전환 수</Title>
             <Content>{calculateSum(info, 'conv', 0)}회</Content>
             <div>
-              {calculateSum(data, 'conv') - calculateSum(info, 'conv')}회
+              {calculateSum(info, 'conv') - calculateSum(data, 'conv')}회
             </div>
           </Div>
           <Div>
             <Title>매출</Title>
             <Content>{calculateSum(info, 'convValue', 0)} 원</Content>
             <div>
-              {calculateSum(data, 'convValue') -
-                calculateSum(info, 'convValue')}
+              {calculateSum(info, 'convValue') -
+                calculateSum(data, 'convValue')}
               원
             </div>
           </Div>
