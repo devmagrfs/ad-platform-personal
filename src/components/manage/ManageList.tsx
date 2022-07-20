@@ -5,7 +5,7 @@ import {useSetRecoilState} from 'recoil';
 
 import {adSelectData} from '@utils/.';
 import {adDelete, getAdsList} from '@src/api/queries';
-import ManageItem from '@src/components/manage/ManageItem';
+import ManageItem from '@components/manage/ManageItem';
 import {IAds} from '@type/models/management';
 import currentIDState from '@src/api/atom';
 import {ManageItemSkeleton} from './ad';

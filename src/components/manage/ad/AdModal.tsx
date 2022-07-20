@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styled from '@emotion/styled';
 
-import {AdForm, ModalSkeleton} from '@src/components/manage/ad';
+import {AdForm, ModalSkeleton} from '@components/manage/ad';
 
 import {getAdItem} from '@src/api/queries';
 

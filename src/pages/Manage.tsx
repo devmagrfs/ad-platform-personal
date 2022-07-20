@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import {Button, SelectChangeEvent} from '@mui/material';
 import styled from '@emotion/styled';
 
-import {ManageList} from '@src/components/manage';
-import DropDown from '@src/components/dropdown/DropDown';
+import {ManageList} from '@components/manage';
+import DropDown from '@components/dropdown/DropDown';
 import {adSelectTypeList} from '@utils/.';
-import {AdModal} from '@src/components/manage/ad';
+import {AdModal} from '@components/manage/ad';
 import {useRecoilValue} from 'recoil';
 import currentIDState from '@src/api/atom';
 

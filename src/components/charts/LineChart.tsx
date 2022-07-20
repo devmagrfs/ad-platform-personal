@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import * as Charts from 'recharts';
 import {format, parseISO} from 'date-fns';
 import styled from '@emotion/styled';
-import DropDown from '@src/components/dropdown/DropDown';
+import DropDown from '@components/dropdown/DropDown';
 import {SelectChangeEvent} from '@mui/material';
 import chartSelectTypeList from '@utils/chartSelectTypeList';
-import {IDailyAdStatus} from '../../types/models/advertise';
+import {IDailyAdStatus} from '@type/models/advertise';
 
 interface IProps {
   chartData: IDailyAdStatus[];

@@ -3,13 +3,14 @@ import {useQueries, useQueryClient} from 'react-query';
 import styled from '@emotion/styled';
 import {getDay, format, add} from 'date-fns';
 import {SelectChangeEvent} from '@mui/material';
+import previousMonday from 'date-fns/previousMonday';
 
 import {getReport, getChannel, getAllReports} from '@src/api/queries';
-import DropDown from '@src/components/dropdown/Select';
+import DropDown from '@components/dropdown/Select';
 import Table from '@components/table/Table';
-import {BarChart as Bar, LineChart} from '@src/components/charts/';
-import Card from '@src/components/dataCard/card';
-import {IDailyAdStatus} from '../types/models/advertise';
+import {BarChart as Bar, LineChart} from '@components/charts/';
+import Card from '@components/dataCard/card';
+import {IDailyAdStatus} from '@type/models/advertise';
 
 export default function Board() {
   const queryClient = useQueryClient();
@@ -60,9 +61,13 @@ export default function Board() {
       return;
     setDateList(() => [...DateList(queryResult[0].data)]);
   }, [queryResult]);
+  const {isLoading} = queryResult[0];
+
+  const previousDay = previousMonday(new Date(type));
+  const changeType = format(new Date(previousDay), 'yyyy-MM-dd');
 
   return (
-    <BoardContainer>
+    <BoardContainer isLoading={isLoading}>
       <DashBoard>
         <Title DashBoard>대시보드</Title>
         <DateSelection>
@@ -73,7 +78,7 @@ export default function Board() {
         <Title>통합 광고 현황</Title>
         <DataBox>
           <DataCard>
-            <Card info={queryResult[1].data} />
+            <Card info={queryResult[1].data} type={changeType} />
           </DataCard>
           <GraphChart>
             <LineChart
@@ -98,11 +103,12 @@ export default function Board() {
   );
 }
 
-const BoardContainer = styled.div`
+const BoardContainer = styled.div<{isLoading: boolean}>`
   padding: 2rem;
   display: flex;
   flex-direction: column;
   height: 170vh;
+  pointer-events: ${({isLoading}) => isLoading && 'none'};
 `;
 const DashBoard = styled.div`
   display: flex;

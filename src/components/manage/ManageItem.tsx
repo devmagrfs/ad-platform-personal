@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 import {IAds} from '@type/models/management';
 import {adItemList, changeFormData} from '@utils/.';
-import {AdItem, Button} from '@src/components/manage/ad';
+import {AdItem, Button} from '@components/manage/ad';
 
 interface IItemProps {
   ad: IAds;
