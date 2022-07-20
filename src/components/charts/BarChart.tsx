@@ -9,7 +9,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-import {IMediaStatus} from '@src/types/models/mediaStatus';
+import {IMediaStatus} from '@type/models/mediaStatus';
 
 interface BarChartProps {
   queryResult: any;

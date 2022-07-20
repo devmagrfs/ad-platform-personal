@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {add, format} from 'date-fns';
 
-import {IAds} from '@src/types/models/management';
+import {IAds} from '@type/models/management';
 
 const BASE_URL = 'http://localhost:3001';
 

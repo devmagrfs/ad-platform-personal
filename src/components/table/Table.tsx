@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 
 import Paper from '@mui/material/Paper';
-import {IMediaStatus} from '@src/types/models/mediaStatus';
+import {IMediaStatus} from '@type/models/mediaStatus';
 import Loading from '@components/common/Loading';
 
 interface Columns {

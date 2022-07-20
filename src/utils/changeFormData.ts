@@ -1,7 +1,7 @@
 import {format} from 'date-fns';
 
-import {IAds} from '@src/types/models/management';
-import {comma} from '@src/utils';
+import {IAds} from '@type/models/management';
+import {comma} from '@utils/.';
 
 const changeFormData = (data: IAds) => {
   const date = new Date(data.startDate);

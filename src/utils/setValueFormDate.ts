@@ -1,7 +1,7 @@
 import {format} from 'date-fns';
 import {UseFormSetValue} from 'react-hook-form';
 
-import {IFormInput, IAds} from '@src/types/models/management';
+import {IFormInput, IAds} from '@type/models/management';
 
 const setValueFormDate = (
   setValue: UseFormSetValue<IFormInput>,

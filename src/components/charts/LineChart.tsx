@@ -4,7 +4,7 @@ import {format, parseISO} from 'date-fns';
 import styled from '@emotion/styled';
 import DropDown from '@src/components/dropdown/DropDown';
 import {SelectChangeEvent} from '@mui/material';
-import chartSelectTypeList from '@src/utils/chartSelectTypeList';
+import chartSelectTypeList from '@utils/chartSelectTypeList';
 import {IDailyAdStatus} from '../../types/models/advertise';
 
 interface IProps {

@@ -1,5 +1,5 @@
 import {differenceInDays, format} from 'date-fns';
-import {IAds, IFormInput} from '@src/types/models/management';
+import {IAds, IFormInput} from '@type/models/management';
 
 const createFormData = (data: IAds | null, formData: IFormInput): IAds => {
   const start = format(new Date(formData.startDate), 'yyyy-MM-dd HH:mm:ss');

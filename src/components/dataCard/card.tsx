@@ -1,11 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
-// import {IDailyAdStatus} from '@src/types/models/advertise';
+// import {IDailyAdStatus} from '@type/models/advertise';
 
 //  IDailyAdStatus[]
 function Card({info}: any) {
-  console.log(info);
-
   // roas, 전환수(conv),
   function calculate(category: any) {
     const result =

@@ -1,4 +1,4 @@
-import {IAds} from '@src/types/models/management';
+import {IAds} from '@type/models/management';
 
 const adselectData = (data: IAds[], type: string) => {
   if (type === 'all') return data;
