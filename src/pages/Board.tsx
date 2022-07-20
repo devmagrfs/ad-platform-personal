@@ -6,7 +6,7 @@ import {SelectChangeEvent} from '@mui/material';
 import previousMonday from 'date-fns/previousMonday';
 
 import {getReport, getChannel, getAllReports} from '@api/queries';
-import {DropDown} from '@components/dropdown';
+import DropDown from '@components/dropdown/DropDown';
 import Table from '@components/table/Table';
 import {BarChart as Bar, LineChart} from '@components/charts';
 import Card from '@components/dataCard/card';
@@ -122,6 +122,8 @@ const IntegrationAd = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
+  position: relative;
+  top: -10px;
 `;
 const CurrentStateOfAd = styled.div`
   height: 40vh;
@@ -151,9 +153,11 @@ const DataBox = styled.div`
 `;
 const DataCard = styled.div`
   flex: 0.5 0 auto;
+  margin-top: 10px;
 `;
 const GraphChart = styled.div`
   flex: 1 0 auto;
+  margin-top: 10px;
 `;
 const BarChart = styled.div`
   flex: 1 0 auto;

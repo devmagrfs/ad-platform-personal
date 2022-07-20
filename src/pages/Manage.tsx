@@ -3,7 +3,7 @@ import {Button, SelectChangeEvent} from '@mui/material';
 import styled from '@emotion/styled';
 
 import {ManageList} from '@components/manage';
-import {DropDown} from '@components/dropdown';
+import DropDown from '@components/dropdown/DropDown';
 import {adSelectTypeList} from '@utils/.';
 import {AdModal} from '@components/manage/ad';
 import {useRecoilValue} from 'recoil';
