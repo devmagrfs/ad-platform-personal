@@ -4,13 +4,11 @@ import {SubmitHandler, useForm} from 'react-hook-form';
 import styled from '@emotion/styled';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {useSetRecoilState} from 'recoil';
-import {useMutation, useQueryClient} from 'react-query';
+import {useAddMutation, useUpdateMutation} from '@hooks/queries/ad';
 import {Alert} from '@mui/material';
 import {differenceInDays, format} from 'date-fns';
 import * as yup from 'yup';
-
 import {IAds, IFormInput} from '@type/models/management';
-import {adCreate, adUpdate} from '@api/queries';
 import currentIDState from '@api/atom';
 
 interface IAdFormProps {
@@ -95,14 +93,8 @@ const createFormData = (data: IAds | null, formData: IFormInput): IAds => {
 export default function AdForm({data, handleModalChange}: IAdFormProps) {
   const setCurrentID = useSetRecoilState(currentIDState);
 
-  const queryClient = useQueryClient();
-
-  const addMutation = useMutation(adCreate, {
-    onSuccess: () => queryClient.invalidateQueries('ads'),
-  });
-  const updateMutation = useMutation(adUpdate, {
-    onSuccess: () => queryClient.invalidateQueries('ads'),
-  });
+  const addMutation = useAddMutation();
+  const updateMutation = useUpdateMutation();
 
   const {
     register,

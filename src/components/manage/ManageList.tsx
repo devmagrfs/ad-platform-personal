@@ -1,10 +1,8 @@
 import React from 'react';
-import {useMutation, useQuery, useQueryClient} from 'react-query';
 import styled from '@emotion/styled';
 import {useSetRecoilState} from 'recoil';
-
-import {adDelete, getAdsList} from '@api/queries';
-import {ManageItem} from '@components/manage';
+import {useDeleteMutation, useAdListQuery} from '@hooks/queries/ad';
+import ManageItem from '@components/manage/ManageItem';
 import {IAds} from '@type/models/management';
 import currentIDState from '@api/atom';
 import {ManageItemSkeleton} from '@components/manage/ad';
@@ -18,14 +16,11 @@ export default function ManageList({
   type,
   handleModalChange,
 }: IManageListProps) {
-  const {isLoading, data} = useQuery<IAds[]>('ads', getAdsList);
+  const {isLoading, data} = useAdListQuery();
 
-  const queryClient = useQueryClient();
   const setCurrentID = useSetRecoilState(currentIDState);
 
-  const deleteMutation = useMutation(adDelete, {
-    onSuccess: () => queryClient.invalidateQueries('ads'),
-  });
+  const deleteMutation = useDeleteMutation();
 
   const handleDeleteData = (id: number) => {
     deleteMutation.mutate(id);

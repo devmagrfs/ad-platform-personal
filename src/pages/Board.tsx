@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {useQueries, useQueryClient} from 'react-query';
+import {useQueryClient} from 'react-query';
 import styled from '@emotion/styled';
 import {getDay, format, add} from 'date-fns';
 import {SelectChangeEvent} from '@mui/material';
 import previousMonday from 'date-fns/previousMonday';
 
-import {getReport, getChannel, getAllReports} from '@api/queries';
+import {useBoardQueries} from '@hooks/queries/ad';
 import DropDown from '@components/dropdown/DropDown';
 import Table from '@components/table/Table';
 import {BarChart as Bar, LineChart} from '@components/charts';
@@ -13,23 +13,12 @@ import Card from '@components/dataCard/card';
 import {IDailyAdStatus} from '@type/models/advertise';
 
 export default function Board() {
-  const queryClient = useQueryClient();
   const [dateList, setDateList] = useState<any>([]);
   const [type, setType] = useState('2022-02-07');
-  const queryResult = useQueries([
-    {
-      queryKey: ['allReports'],
-      queryFn: getAllReports,
-    },
-    {
-      queryKey: ['report', type],
-      queryFn: () => getReport(new Date(type)),
-    },
-    {
-      queryKey: ['channel', type],
-      queryFn: () => getChannel(new Date(type)),
-    },
-  ]);
+
+  const queryClient = useQueryClient();
+
+  const queryResult = useBoardQueries(type);
 
   const handleChange = (event: SelectChangeEvent<string>) => {
     const index = Number(event.target.value);
