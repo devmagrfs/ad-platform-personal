@@ -6,16 +6,91 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {useSetRecoilState} from 'recoil';
 import {useMutation, useQueryClient} from 'react-query';
 import {Alert} from '@mui/material';
+import {differenceInDays, format} from 'date-fns';
+import * as yup from 'yup';
 
 import {IAds, IFormInput} from '@type/models/management';
 import {adCreate, adUpdate} from '@api/queries';
-import {createFormData, validationSchema, setValueFormDate} from '@utils/.';
 import currentIDState from '@api/atom';
 
 interface IAdFormProps {
   data: null | IAds;
   handleModalChange: () => void;
 }
+
+const validationSchema = yup.object().shape({
+  title: yup
+    .string()
+    .required('제목을 입력해주세요')
+    .min(2, '2자 이상 입력해주세요')
+    .max(20, '20자 이하로 입력해주세요'),
+  startDate: yup.date().typeError('시작일을 지정은 필수 사항입니다'),
+  endDate: yup
+    .date()
+    .when('startDate', (starDate, schema) => {
+      return schema.test({
+        test: (endDate: string | number | Date) => {
+          if (!endDate) return true;
+          return differenceInDays(new Date(starDate), new Date(endDate)) < 0;
+        },
+        message: '종료일이 시작일보다 빠를 수 없습니다',
+      });
+    })
+    .transform(value => (String(value).includes('Invalid') ? null : value))
+    .nullable(),
+  budget: yup
+    .number()
+    .typeError('예산은 필수 입력 사항입니다 ')
+    .min(10, '최소 10원이상 입력해주세요')
+    .max(1000000000000, '최대 1,000,000,000,000원 이하 입력해주세요'),
+  roas: yup.number().typeError('수익률을 입력해주세요'),
+  cost: yup
+    .number()
+    .typeError('광고비용은 필수 입력 사항입니다 ')
+    .min(10, '최소 10원이상 입력해주세요')
+    .max(1000000000000, '최대 1,000,000,000,000원 이하 입력해주세요'),
+  convValue: yup
+    .number()
+    .typeError('매출은 필수 입력 사항입니다 ')
+    .min(10, '최소 10원이상 입력해주세요')
+    .max(1000000000000, '최대 1,000,000,000,000원 이하 입력해주세요'),
+});
+
+const createFormData = (data: IAds | null, formData: IFormInput): IAds => {
+  const start = format(new Date(formData.startDate), 'yyyy-MM-dd HH:mm:ss');
+
+  const end =
+    formData.endDate !== null
+      ? format(new Date(formData.endDate), 'yyyy-MM-dd HH:mm:ss')
+      : null;
+
+  const diff = (date1: Date, date2: Date): string =>
+    differenceInDays(date1, date2) < 0 ? 'ended' : 'active';
+
+  const curStatus =
+    formData.endDate === null
+      ? 'active'
+      : diff(new Date(), new Date(formData.endDate));
+
+  const id = new Date().valueOf();
+
+  const newAd: IAds = {
+    id: data ? data.id : id,
+    adType: formData.adType,
+    status: data ? curStatus : 'active',
+    title: formData.title,
+    startDate: start,
+    endDate: end,
+    budget: formData.budget,
+    report: {
+      roas: formData.roas,
+      convValue: formData.convValue,
+      cost: formData.cost,
+    },
+  };
+
+  return newAd;
+};
 
 export default function AdForm({data, handleModalChange}: IAdFormProps) {
   const setCurrentID = useSetRecoilState(currentIDState);
@@ -38,10 +113,6 @@ export default function AdForm({data, handleModalChange}: IAdFormProps) {
     resolver: yupResolver(validationSchema),
   });
 
-  useEffect(() => {
-    if (data) setValueFormDate(setValue, data);
-  }, [data]);
-
   const handleSubmitForm: SubmitHandler<IFormInput> = formData => {
     const newAd = data
       ? createFormData(data, formData)
@@ -60,6 +131,26 @@ export default function AdForm({data, handleModalChange}: IAdFormProps) {
     handleModalChange();
     setCurrentID(-1);
   };
+
+  const setValueFormDate = (setData: IAds) => {
+    setValue('title', setData.title);
+    setValue('startDate', format(new Date(setData.startDate), 'yyyy-MM-dd'));
+    setValue(
+      'endDate',
+      setData.endDate === null
+        ? ''
+        : format(new Date(setData.endDate), 'yyyy-MM-dd'),
+    );
+    setValue('budget', setData.budget);
+    setValue('cost', setData.report.cost);
+    setValue('roas', setData.report.roas);
+    setValue('convValue', setData.report.convValue);
+    setValue('adType', setData.adType);
+  };
+
+  useEffect(() => {
+    if (data) setValueFormDate(data);
+  }, [data]);
 
   return (
     <Form onSubmit={handleSubmit(handleSubmitForm)}>

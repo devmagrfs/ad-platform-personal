@@ -3,12 +3,11 @@ import {useMutation, useQuery, useQueryClient} from 'react-query';
 import styled from '@emotion/styled';
 import {useSetRecoilState} from 'recoil';
 
-import {adSelectData} from '@utils/.';
 import {adDelete, getAdsList} from '@api/queries';
-import ManageItem from '@components/manage/ManageItem';
+import {ManageItem} from '@components/manage';
 import {IAds} from '@type/models/management';
 import currentIDState from '@api/atom';
-import {ManageItemSkeleton} from './ad';
+import {ManageItemSkeleton} from '@components/manage/ad';
 
 interface IManageListProps {
   type: string;
@@ -37,6 +36,9 @@ export default function ManageList({
     setCurrentID(id);
   };
 
+  const adselectData =
+    type === 'all' ? data : data?.filter(item => item.status === type);
+
   if (isLoading)
     return (
       <ManageListContainer>
@@ -49,7 +51,7 @@ export default function ManageList({
   return (
     <ManageListContainer>
       {data &&
-        adSelectData(data, type).map((ad: IAds) => (
+        adselectData?.map((ad: IAds) => (
           <ManageItem
             ad={ad}
             handleDeleteData={handleDeleteData}

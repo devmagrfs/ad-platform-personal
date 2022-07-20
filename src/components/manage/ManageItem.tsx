@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import {format} from 'date-fns';
 
 import {IAds} from '@type/models/management';
-import {adItemList, changeFormData} from '@utils/.';
 import {AdItem, Button} from '@components/manage/ad';
 
 interface IItemProps {
@@ -17,6 +17,27 @@ export default function ManageItem({
   handleUpdateData,
   handleDeleteData,
 }: IItemProps) {
+  const adItemList: string[] = [
+    '상태',
+    '광고생성일',
+    '일 희망 예산',
+    '광고수익률',
+    '매출',
+    '광고비용',
+  ];
+
+  const changeFormData = (data: IAds) => {
+    const date = new Date(data.startDate);
+
+    return [
+      data.status === 'active' ? '진행중' : '종료',
+      format(date, 'yyyy-MM-dd'),
+      `${Math.round(data.budget / 10000).toLocaleString()}만원`,
+      `${data.report.roas}%`,
+      `${Math.round(data.report.convValue / 10000).toLocaleString()}만원`,
+      `${Math.round(data.report.cost / 10000).toLocaleString()}만원`,
+    ];
+  };
   const changeData = changeFormData(ad);
 
   return (
