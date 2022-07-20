@@ -111,17 +111,13 @@ const BoardContainer = styled.div<{isLoading: boolean}>`
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  height: 170vh;
   pointer-events: ${({isLoading}) => isLoading && 'none'};
 `;
 const DashBoard = styled.div`
   display: flex;
-  height: 5.5vh;
-  display: flex;
   flex: 0 1 auto;
 `;
 const IntegrationAd = styled.div`
-  height: 40vh;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -130,7 +126,6 @@ const IntegrationAd = styled.div`
   top: -10px;
 `;
 const CurrentStateOfAd = styled.div`
-  height: 40vh;
   padding: 2rem;
   flex: 1 1 auto;
 `;
@@ -152,7 +147,6 @@ const DateSelection = styled.div`
 const DataBox = styled.div`
   display: flex;
   flex-direction: column;
-  height: 70vh;
   flex: 1 1 auto;
 `;
 const DataCard = styled.div`
@@ -161,7 +155,7 @@ const DataCard = styled.div`
 `;
 const GraphChart = styled.div`
   flex: 1 0 auto;
-  margin-top: 10px;
+  margin-top: 20px;
 `;
 const BarChart = styled.div`
   flex: 1 0 auto;
@@ -169,4 +163,5 @@ const BarChart = styled.div`
 
 const Diagram = styled.div`
   flex: 0.9 0 auto;
+  margin-top: 20px;
 `;

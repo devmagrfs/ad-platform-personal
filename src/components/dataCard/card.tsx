@@ -90,7 +90,8 @@ export default Card;
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 3vw;
 `;
 const Div = styled.div`
   width: 200px;
