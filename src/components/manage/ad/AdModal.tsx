@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 import {AdForm, ModalSkeleton} from '@components/manage/ad';
 
-import {getAdItem} from '@src/api/queries';
+import {getAdItem} from '@api/queries';
 
 interface IAdModalProps {
   handleModalChange: () => void;

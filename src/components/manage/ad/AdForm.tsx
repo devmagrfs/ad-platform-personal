@@ -8,9 +8,9 @@ import {useMutation, useQueryClient} from 'react-query';
 import {Alert} from '@mui/material';
 
 import {IAds, IFormInput} from '@type/models/management';
-import {adCreate, adUpdate} from '@src/api/queries';
+import {adCreate, adUpdate} from '@api/queries';
 import {createFormData, validationSchema, setValueFormDate} from '@utils/.';
-import currentIDState from '@src/api/atom';
+import currentIDState from '@api/atom';
 
 interface IAdFormProps {
   data: null | IAds;

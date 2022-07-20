@@ -5,10 +5,10 @@ import {getDay, format, add} from 'date-fns';
 import {SelectChangeEvent} from '@mui/material';
 import previousMonday from 'date-fns/previousMonday';
 
-import {getReport, getChannel, getAllReports} from '@src/api/queries';
-import DropDown from '@components/dropdown/Select';
+import {getReport, getChannel, getAllReports} from '@api/queries';
+import {DropDown} from '@components/dropdown';
 import Table from '@components/table/Table';
-import {BarChart as Bar, LineChart} from '@components/charts/';
+import {BarChart as Bar, LineChart} from '@components/charts';
 import Card from '@components/dataCard/card';
 import {IDailyAdStatus} from '@type/models/advertise';
 

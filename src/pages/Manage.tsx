@@ -3,11 +3,11 @@ import {Button, SelectChangeEvent} from '@mui/material';
 import styled from '@emotion/styled';
 
 import {ManageList} from '@components/manage';
-import DropDown from '@components/dropdown/DropDown';
+import {DropDown} from '@components/dropdown';
 import {adSelectTypeList} from '@utils/.';
 import {AdModal} from '@components/manage/ad';
 import {useRecoilValue} from 'recoil';
-import currentIDState from '@src/api/atom';
+import currentIDState from '@api/atom';
 
 export default function Manage() {
   const [type, setType] = useState<string>('all');

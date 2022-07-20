@@ -4,10 +4,10 @@ import styled from '@emotion/styled';
 import {useSetRecoilState} from 'recoil';
 
 import {adSelectData} from '@utils/.';
-import {adDelete, getAdsList} from '@src/api/queries';
+import {adDelete, getAdsList} from '@api/queries';
 import ManageItem from '@components/manage/ManageItem';
 import {IAds} from '@type/models/management';
-import currentIDState from '@src/api/atom';
+import currentIDState from '@api/atom';
 import {ManageItemSkeleton} from './ad';
 
 interface IManageListProps {
